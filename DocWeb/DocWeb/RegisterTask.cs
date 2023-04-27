@@ -66,6 +66,7 @@ namespace DocWeb
                 {
                     tsp.StartTime = trigger.StartBoundary;
                     tsp.Interval = trigger.Repetition.Interval;
+                    tsp.Enable = trigger.Enabled;
                 }
 
                 IExecAction action = null;
@@ -133,13 +134,13 @@ namespace DocWeb
                 // 常规
                 task.RegistrationInfo.Description = para.Description;
                 // 触发器
-                ITimeTrigger trigger = (ITimeTrigger) task.Triggers.Create(_TASK_TRIGGER_TYPE2.TASK_TRIGGER_TIME);
+                ITimeTrigger trigger = task.Triggers.Create(_TASK_TRIGGER_TYPE2.TASK_TRIGGER_TIME) as ITimeTrigger;
                 trigger.Id = triggerName;
                 trigger.Enabled = para.Enable;
                 trigger.Repetition.Interval = para.Interval;
                 trigger.StartBoundary = para.StartTime;
                 // 操作
-                IExecAction action = (IExecAction) task.Actions.Create(_TASK_ACTION_TYPE.TASK_ACTION_EXEC);
+                IExecAction action = task.Actions.Create(_TASK_ACTION_TYPE.TASK_ACTION_EXEC) as IExecAction;
                 action.Id = actionName;
                 action.Path = para.ExePath;
                 action.Arguments = para.ExeArgs;
