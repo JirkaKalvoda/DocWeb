@@ -1,0 +1,1 @@
+mkdocs.exe serve -f .\mkdocs.yml

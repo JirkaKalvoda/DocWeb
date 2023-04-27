@@ -1,0 +1,11 @@
+site_name: STK Components Documents
+site_description: STK Components 2023R1文档和中文翻译
+site_author: Author001
+theme: readthedocs
+date: 2023-04-21
+use_directory_urls: true
+dev_addr: 127.0.0.1:8859
+docs_dir: '../../src'
+nav:
+    #- Home: 'index.md'
+    - 目录: 'contents.md'
