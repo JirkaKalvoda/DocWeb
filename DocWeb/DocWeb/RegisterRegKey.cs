@@ -13,7 +13,7 @@ namespace DocWeb
     /// </summary>
     static class RegisterRegKey
     {
-        private const string autoStartValue = "DocWeb_ED4F3008-A7D3-4E9F-B239-E8E7EB6FCEC7";
+        private const string autoStartValue = "DocWeb_{ED4F3008-A7D3-4E9F-B239-E8E7EB6FCEC7}";
 
         private const string autoStartPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 

@@ -18,7 +18,7 @@ namespace DocWeb
 
         private static IRegisteredTask regTask;
 
-        private const string taskName = @"MkDocs_E85BD843-5026-4DD1-AB35-69DBE4B2521C";
+        private const string taskName = @"MkDocs_{E85BD843-5026-4DD1-AB35-69DBE4B2521C}";
 
         private const string triggerName = "trigger1";       // ITrigger.Id和IAction.Id不能重复
         

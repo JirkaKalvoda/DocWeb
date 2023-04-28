@@ -226,8 +226,6 @@ namespace DocWeb
 
         private void InitTray()
         {
-            this.FormClosing += Form1_FormClosing;
-            this.SizeChanged += Form1_SizeChanged;
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon();
             System.IntPtr iconHandle = Resources.update_32x32.GetHicon();
             this.notifyIcon1.Icon = Icon.FromHandle(iconHandle);
@@ -258,16 +256,17 @@ namespace DocWeb
                     this.tlsmi_exit
                 }
             );
-            trayMenuStrip.ItemClicked += TrayMenuStrip_ItemClicked;
 
             this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.notifyIcon1.BalloonTipText = "帮助网站更新程序";
             this.notifyIcon1.BalloonTipTitle = "帮助网站更新程序";
             this.notifyIcon1.ContextMenuStrip = trayMenuStrip;
-
             this.notifyIcon1.Text = "帮助网站更新程序";
             this.notifyIcon1.Visible = true;
+            
+            trayMenuStrip.ItemClicked += TrayMenuStrip_ItemClicked;
             this.notifyIcon1.MouseDoubleClick += NotifyIcon1_MouseDoubleClick;
+            Hook(true);
         }
 
 
@@ -316,24 +315,41 @@ namespace DocWeb
 
         private void HideToNotify()
         {
+            Hook(false);
             this.Visible = false;
             this.ShowInTaskbar = false;
             this.WindowState = FormWindowState.Minimized;
+            Hook(true);
         }
 
         private void ShowFromNotify()
         {
+            Hook(false);
             this.Visible = true;
             this.ShowInTaskbar = true;
             this.WindowState = FormWindowState.Normal;
+            Hook(true);
+        }
+
+        /// <summary>
+        /// 避免属性修改时循环触发
+        /// </summary>
+        /// <param name="isBind"></param>
+        private void Hook(bool isBind)
+        {
+            this.SizeChanged -= Form1_SizeChanged;
+            this.FormClosing -= Form1_FormClosing;
+            if (isBind)
+            {
+                this.SizeChanged += Form1_SizeChanged;
+                this.FormClosing += Form1_FormClosing;
+            }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
-                this.Visible = false;
-                this.ShowInTaskbar = false;
                 HideToNotify();
             }
         }

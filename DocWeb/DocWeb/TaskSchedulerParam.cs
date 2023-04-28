@@ -35,7 +35,7 @@ namespace DocWeb
         /// <br>https://learn.microsoft.com/en-us/windows/win32/taskschd/repetitionpattern-interval</br>
         /// </summary>
         
-        public string Interval { get; set; } = "P1DT";
+        public string Interval { get; set; } = "P1DT0H0M0S";
 
         #endregion
 
